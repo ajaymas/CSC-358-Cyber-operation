@@ -30,14 +30,35 @@ gpg --version
 
 ## ✅ **2. PGP Authentication: Digital Signatures**
 Generate a **PGP key pair** (private & public keys):
-```bash
-gpg --full-generate-key
-```
 
-List your generated keys:
-```bash
-gpg --list-keys
-```
+# This step will guide you through generating a PGP key pair, which includes both a private key and a public key.
+
+1. **Run the following command to generate the PGP key pair:**
+
+    ```bash
+    gpg --full-generate-key
+    ```
+
+2. **Select the key type:**
+    - When prompted, select the key type. For most users, **RSA** is the recommended choice. Choose **1** to select the RSA option.
+
+3. **Choose the key size:**
+    - Next, you will be asked to choose the key size. For stronger encryption, select **4096 bits** by typing **4096**. This is the recommended size for enhanced security.
+
+4. **Set expiration date:**
+    - You will then be prompted to set an expiration date for the key. You can either set a specific expiration date or choose **0** to keep it valid indefinitely.
+
+5. **Enter your name and email:**
+    - Provide your name and email address when prompted. This is how others will identify you when verifying your PGP key.
+
+6. **Add an optional comment:**
+    - You can enter an optional comment (e.g., your organization or purpose for the key) or leave it blank.
+
+7. **Set a strong passphrase:**
+    - Finally, set a strong passphrase to protect your private key. Make sure the passphrase is secure and not easily guessable.
+
+After completing these steps, your PGP key pair (private and public keys) will be generated and stored in your keyring.
+
 
 Sign a file:
 ```bash
