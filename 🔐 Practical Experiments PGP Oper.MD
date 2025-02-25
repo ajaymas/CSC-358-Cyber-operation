@@ -2,6 +2,15 @@
 
 This document provides step-by-step **PGP experiments** using **GnuPG (GPG)** on **Linux/macOS**.
 
+# 🔥 What This Covers:
+
+✅ **PGP Authentication** (Digital Signatures)  
+✅ **PGP Confidentiality** (Encryption & Decryption)  
+✅ **PGP Authentication + Confidentiality** (Combined Approach)  
+✅ **PGP Compression** (Efficient Storage & Transmission)  
+✅ **PGP Email Compatibility** (Encoding for Email)  
+✅ **PGP Session Keys & Key Management**  
+
 ---
 
 ## 📌 **1. Setup: Install GnuPG (GPG)**
