@@ -100,85 +100,144 @@ gpg --verify message.sig message.txt
 
 
 
+# Experiment 2: PGP Confidentiality (Encryption & Decryption)
 
+## Objective
 
+Encrypt message with session key and protect it using RSA.
+
+## Steps
+
+1️⃣ **Sender Generates a Message**
+```bash
+echo "Confidential report: Project X details" > secret_message.txt
+```
+
+2️⃣ **Encrypt Message Using Receiver’s Public Key**
+```bash
+gpg --output secret_message.gpg --encrypt --recipient receiver@example.com secret_message.txt
+```
+- Encrypts using CAST-128 / IDEA / 3DES.
+- Generates a 128-bit session key.
+- Encrypts session key using receiver’s public key.
+
+3️⃣ **Send secret_message.gpg to the Receiver**
+
+4️⃣ **Receiver Decrypts the Message**
+```bash
+gpg --output decrypted_message.txt --decrypt secret_message.gpg
+```
+- Decrypts session key with receiver’s private key.
+- Uses session key to decrypt the message.
+
+✅ Receiver reads the original message!
 
 ---
 
-## 🔐 **3. PGP Confidentiality: Encryption & Decryption**
-Export the public key to share:
+# 🔐 Experiment 3: Authentication + Confidentiality
+
+## Objective
+
+Sign & encrypt a message for both authenticity & confidentiality.
+
+## Steps
+
+1️⃣ **Sender Signs the Message**
 ```bash
-gpg --export -a "Your Name" > public_key.asc
+gpg --output signed_message.txt --sign secret_message.txt
+```
+- Signs the message by attaching a digital signature.
+
+2️⃣ **Encrypt the Signed Message**
+```bash
+gpg --output secure_message.gpg --encrypt --recipient receiver@example.com signed_message.txt
+```
+- Encrypts both message & signature.
+- Encrypts session key using RSA.
+
+3️⃣ **Send secure_message.gpg to the Receiver**
+
+4️⃣ **Receiver Decrypts & Extracts the Signed Message**
+```bash
+gpg --output decrypted_signed_message.txt --decrypt secure_message.gpg
 ```
 
-Encrypt a file using the recipient's public key:
+5️⃣ **Receiver Verifies the Signature**
 ```bash
-gpg --encrypt --recipient "Recipient Name" secret.txt
+gpg --verify decrypted_signed_message.txt
+```
+- Ensures the sender actually signed the message.
+
+✅ Ensures both privacy & authenticity.
+
+
+
+# Experiment 2: PGP Confidentiality (Encryption & Decryption)
+
+## Objective
+
+Encrypt message with session key and protect it using RSA.
+
+## Steps
+
+1️⃣ **Sender Generates a Message**
+```bash
+echo "Confidential report: Project X details" > secret_message.txt
 ```
 
-Decrypt a file:
+2️⃣ **Encrypt Message Using Receiver’s Public Key**
 ```bash
-gpg --decrypt secret.txt.gpg
+gpg --output secret_message.gpg --encrypt --recipient receiver@example.com secret_message.txt
 ```
+- Encrypts using CAST-128 / IDEA / 3DES.
+- Generates a 128-bit session key.
+- Encrypts session key using receiver’s public key.
+
+3️⃣ **Send secret_message.gpg to the Receiver**
+
+4️⃣ **Receiver Decrypts the Message**
+```bash
+gpg --output decrypted_message.txt --decrypt secret_message.gpg
+```
+- Decrypts session key with receiver’s private key.
+- Uses session key to decrypt the message.
+
+✅ Receiver reads the original message!
 
 ---
 
-## 🔄 **4. PGP Authentication + Confidentiality (Signing & Encrypting)**
-Sign and encrypt a message:
+# 🔐 Experiment 3: Authentication + Confidentiality
+
+## Objective
+
+Sign & encrypt a message for both authenticity & confidentiality.
+
+## Steps
+
+1️⃣ **Sender Signs the Message**
 ```bash
-gpg --sign --encrypt --recipient "Recipient Name" confidential.txt
+gpg --output signed_message.txt --sign secret_message.txt
+```
+- Signs the message by attaching a digital signature.
+
+2️⃣ **Encrypt the Signed Message**
+```bash
+gpg --output secure_message.gpg --encrypt --recipient receiver@example.com signed_message.txt
+```
+- Encrypts both message & signature.
+- Encrypts session key using RSA.
+
+3️⃣ **Send secure_message.gpg to the Receiver**
+
+4️⃣ **Receiver Decrypts & Extracts the Signed Message**
+```bash
+gpg --output decrypted_signed_message.txt --decrypt secure_message.gpg
 ```
 
-Decrypt and verify:
+5️⃣ **Receiver Verifies the Signature**
 ```bash
-gpg --decrypt confidential.txt.gpg
+gpg --verify decrypted_signed_message.txt
 ```
+- Ensures the sender actually signed the message.
 
----
-
-## 📦 **5. PGP Compression (Efficient Storage & Transmission)**
-Compress a file while signing:
-```bash
-gpg --sign --compress-algo ZIP data.txt
-```
-
----
-
-## 📧 **6. PGP Email Compatibility (ASCII Armoring for Email)**
-Convert binary output to text (ASCII armor):
-```bash
-gpg --armor --export "Your Name" > public_key.asc
-```
-
-Encrypt a file with ASCII output:
-```bash
-gpg --armor --encrypt --recipient "Recipient Name" email.txt
-```
-
-Decrypt ASCII armored message:
-```bash
-gpg --decrypt email.txt.asc
-```
-
----
-
-## 🔑 **7. PGP Session Keys & Key Management**
-Extract session key used in encryption:
-```bash
-gpg --show-session-key secret.txt.gpg
-```
-
-Delete a key pair:
-```bash
-gpg --delete-secret-and-public-key "Your Name"
-```
-
-Revoke a key:
-```bash
-gpg --gen-revoke "Your Name" > revoke.asc
-```
-
----
-
-## 🎯 **Conclusion**
-This guide covers essential **PGP operations** for security, encryption, and key management in Linux/macOS using **GnuPG**. Experiment and integrate PGP into your security workflow! 🚀
+✅ Ensures both privacy & authenticity.
