@@ -31,7 +31,7 @@ gpg --version
 ## ✅ **2. PGP Authentication: Digital Signatures**
 Generate a **PGP key pair** (private & public keys):
 
-# This step will guide you through generating a PGP key pair, which includes both a private key and a public key.
+## This step will guide you through generating a PGP key pair, which includes both a private key and a public key.
 
 1. **Run the following command to generate the PGP key pair:**
 
@@ -70,18 +70,18 @@ Verify message authenticity using SHA-1 hashing and RSA digital signatures.
 ## Steps
 
 1️⃣ **Sender Creates a Message**
-```bash
+```
 echo "This is a confidential document." > message.txt
 ```
 
 2️⃣ **Generate SHA-1 Hash of Message**
-```bash
+```
 sha1sum message.txt > message_hash.txt
 ```
 - Generates a 160-bit SHA-1 hash.
 
 3️⃣ **Encrypt Hash with Sender’s Private Key (Sign Message)**
-```bash
+```
 gpg --output message.sig --sign message.txt
 ```
 - Encrypts the hash with sender’s private key (RSA).
@@ -90,7 +90,7 @@ gpg --output message.sig --sign message.txt
 4️⃣ **Send message.txt and message.sig to the Receiver**
 
 5️⃣ **Receiver Verifies the Signature**
-```bash
+```
 gpg --verify message.sig message.txt
 ```
 - Extracts the signature and verifies it with sender’s public key.
