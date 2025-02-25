@@ -58,17 +58,11 @@ Generate a **PGP key pair** (private & public keys):
     - Finally, set a strong passphrase to protect your private key. Make sure the passphrase is secure and not easily guessable.
 
 After completing these steps, your PGP key pair (private and public keys) will be generated and stored in your keyring.
-
-
-Sign a file:
-```bash
-gpg --clearsign message.txt
 ```
 
-Verify the signature:
-```bash
-gpg --verify message.txt.asc
-```
+
+
+
 
 ---
 
