@@ -60,184 +60,92 @@ Generate a **PGP key pair** (private & public keys):
 After completing these steps, your PGP key pair (private and public keys) will be generated and stored in your keyring.
 ```
 
-
-# 🛠 Experiment 1: PGP Authentication (Digital Signature)
-
-## Objective
-
+Experiment 1: PGP Authentication (Digital Signature)
+Objective
 Verify message authenticity using SHA-1 hashing and RSA digital signatures.
 
-## Steps
-
-1️⃣ **Sender Creates a Message**
+Steps
+1️⃣ Sender Creates a Message
 ```
-echo "This is a confidential document." > message.txt
+echo "Confidential Research Document" > message.txt
 ```
-
-2️⃣ **Generate SHA-1 Hash of Message**
+2️⃣ Generate SHA-1 Hash of Message
 ```
 sha1sum message.txt > message_hash.txt
 ```
-- Generates a 160-bit SHA-1 hash.
-
-3️⃣ **Encrypt Hash with Sender’s Private Key (Sign Message)**
+Generates a 160-bit SHA-1 hash of message.txt.
+3️⃣ Encrypt Hash with Sender’s Private Key (Digital Signature)
 ```
 gpg --output message.sig --sign message.txt
 ```
-- Encrypts the hash with sender’s private key (RSA).
-- Creates message.sig (digitally signed message).
+Signs message.txt by encrypting its hash with the sender’s private key.
+4️⃣ Send message.txt and message.sig to the Receiver
+Use any method (email, scp, etc.) to send the files.
 
-4️⃣ **Send message.txt and message.sig to the Receiver**
-
-5️⃣ **Receiver Verifies the Signature**
+5️⃣ Receiver Verifies the Signature
 ```
 gpg --verify message.sig message.txt
 ```
-- Extracts the signature and verifies it with sender’s public key.
-
-✅ If hash matches, the message is authentic.
-
+GPG extracts the signature, decrypts the hash using the sender’s public key, and compares it with the newly generated SHA-1 hash.
+If both match, the message is authentic.
 
 
+## Experiment 2: PGP Confidentiality (Encryption & Decryption)
+Objective
+Encrypt a message using a session key and protect the session key using RSA.
 
-# Experiment 2: PGP Confidentiality (Encryption & Decryption)
-
-## Objective
-
-Encrypt message with session key and protect it using RSA.
-
-## Steps
-
-1️⃣ **Sender Generates a Message**
-```bash
-echo "Confidential report: Project X details" > secret_message.txt
+Steps
+1️⃣ Sender Generates a Message
 ```
-
-2️⃣ **Encrypt Message Using Receiver’s Public Key**
-```bash
+echo "Confidential Research Findings" > secret_message.txt
+```
+2️⃣ Encrypt Message Using Receiver’s Public Key
+```
 gpg --output secret_message.gpg --encrypt --recipient receiver@example.com secret_message.txt
 ```
-- Encrypts using CAST-128 / IDEA / 3DES.
-- Generates a 128-bit session key.
-- Encrypts session key using receiver’s public key.
+Uses CAST-128 / IDEA / 3DES for encryption.
+Generates a 128-bit session key (random).
+Encrypts the session key using the receiver’s public key.
+Attaches the encrypted session key to the message.
+3️⃣ Send secret_message.gpg to the Receiver
+4️⃣ Receiver Decrypts the Message Using Private Key
 
-3️⃣ **Send secret_message.gpg to the Receiver**
-
-4️⃣ **Receiver Decrypts the Message**
-```bash
+```
 gpg --output decrypted_message.txt --decrypt secret_message.gpg
 ```
-- Decrypts session key with receiver’s private key.
-- Uses session key to decrypt the message.
+Decrypts the session key using RSA and receiver’s private key.
+Uses the session key to decrypt secret_message.gpg.
+✅ Receiver Can Now Read the Original Message!
+🔹 Experiment 3: Combining Authentication & Confidentiality
+Objective
+Ensure both authentication and confidentiality by signing & encrypting a message.
 
-✅ Receiver reads the original message!
-
----
-
-# 🔐 Experiment 3: Authentication + Confidentiality
-
-## Objective
-
-Sign & encrypt a message for both authenticity & confidentiality.
-
-## Steps
-
-1️⃣ **Sender Signs the Message**
-```bash
+Steps
+1️⃣ Sender Creates & Signs the Message
+```
 gpg --output signed_message.txt --sign secret_message.txt
 ```
-- Signs the message by attaching a digital signature.
-
-2️⃣ **Encrypt the Signed Message**
-```bash
+Attaches a digital signature to secret_message.txt.
+2️⃣ Encrypt Signed Message
+```
 gpg --output secure_message.gpg --encrypt --recipient receiver@example.com signed_message.txt
 ```
-- Encrypts both message & signature.
-- Encrypts session key using RSA.
-
-3️⃣ **Send secure_message.gpg to the Receiver**
-
-4️⃣ **Receiver Decrypts & Extracts the Signed Message**
-```bash
+Encrypts both message & signature.
+Encrypts the session key using RSA.
+3️⃣ Send secure_message.gpg to the Receiver
+4️⃣ Receiver Decrypts the Message
+```
 gpg --output decrypted_signed_message.txt --decrypt secure_message.gpg
 ```
-
-5️⃣ **Receiver Verifies the Signature**
-```bash
+Recovers both the message and signature.
+5️⃣ Receiver Verifies the Signature
+```
 gpg --verify decrypted_signed_message.txt
 ```
-- Ensures the sender actually signed the message.
+Ensures the sender actually signed the message.
+📌 Summary
+✅ Authentication: Verifies sender using SHA-1 + RSA signatures.
+✅ Confidentiality: Encrypts message using CAST-128 / 3DES + RSA.
+✅ Both Together: Sign + Encrypt to ensure privacy & authenticity.
 
-✅ Ensures both privacy & authenticity.
-
-
-
-# Experiment 2: PGP Confidentiality (Encryption & Decryption)
-
-## Objective
-
-Encrypt message with session key and protect it using RSA.
-
-## Steps
-
-1️⃣ **Sender Generates a Message**
-```bash
-echo "Confidential report: Project X details" > secret_message.txt
-```
-
-2️⃣ **Encrypt Message Using Receiver’s Public Key**
-```bash
-gpg --output secret_message.gpg --encrypt --recipient receiver@example.com secret_message.txt
-```
-- Encrypts using CAST-128 / IDEA / 3DES.
-- Generates a 128-bit session key.
-- Encrypts session key using receiver’s public key.
-
-3️⃣ **Send secret_message.gpg to the Receiver**
-
-4️⃣ **Receiver Decrypts the Message**
-```bash
-gpg --output decrypted_message.txt --decrypt secret_message.gpg
-```
-- Decrypts session key with receiver’s private key.
-- Uses session key to decrypt the message.
-
-✅ Receiver reads the original message!
-
----
-
-# 🔐 Experiment 3: Authentication + Confidentiality
-
-## Objective
-
-Sign & encrypt a message for both authenticity & confidentiality.
-
-## Steps
-
-1️⃣ **Sender Signs the Message**
-```bash
-gpg --output signed_message.txt --sign secret_message.txt
-```
-- Signs the message by attaching a digital signature.
-
-2️⃣ **Encrypt the Signed Message**
-```bash
-gpg --output secure_message.gpg --encrypt --recipient receiver@example.com signed_message.txt
-```
-- Encrypts both message & signature.
-- Encrypts session key using RSA.
-
-3️⃣ **Send secure_message.gpg to the Receiver**
-
-4️⃣ **Receiver Decrypts & Extracts the Signed Message**
-```bash
-gpg --output decrypted_signed_message.txt --decrypt secure_message.gpg
-```
-
-5️⃣ **Receiver Verifies the Signature**
-```bash
-gpg --verify decrypted_signed_message.txt
-```
-- Ensures the sender actually signed the message.
-
-✅ Ensures both privacy & authenticity.
+This real-world PGP workflow helps protect sensitive emails. 🚀
