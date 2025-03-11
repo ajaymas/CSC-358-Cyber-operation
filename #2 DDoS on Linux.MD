@@ -1,7 +1,7 @@
 # **DDoS Attacks Practically on Linux**
 
 ## **1. Offensive Perspective (Simulating DDoS Attacks)**
-⚠️ **Warning:** Conduct these activities in a controlled lab environment only.
+⚠️ **Warning: Educational purpose only ** Conduct these activities in a controlled lab environment only.
 
 ### **1.1 Using LOIC (Low Orbit Ion Cannon)**
 LOIC is a simple stress-testing tool that can simulate TCP, UDP, and HTTP floods.
