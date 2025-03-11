@@ -13,7 +13,11 @@ unzip master.zip && cd LOIC-master
 ```
 #### **Execution:**
 ```bash
-mono LOIC.exe
+chmod 777 loic.sh
+./loic.sh install
+./loic.sh update
+cd LOIC
+./loic.sh run
 ```
 Configure the target and initiate the attack.
 
