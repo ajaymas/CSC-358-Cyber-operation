@@ -12,7 +12,7 @@ Before running the buffer overflow programs, make sure you have the following in
 - **Debugging Tools: Build and Install AFL ++ For Fuzzing** 
 Run the below commands to build and install AFL++ on Ubuntu virtual host.
 
-    ```
+```bash
 sudo apt-get update
 sudo apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
 # try to install llvm 12 and install the distro default if that fails
