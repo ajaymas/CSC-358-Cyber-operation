@@ -113,7 +113,12 @@ int main(int argc, char *argv[]) {
 ```bash
 gcc -fno-stack-protector -z execstack -o stack_overflow stack_overflow.c
 ```
+gcc:
 
+- This is the GNU Compiler Collection, which is used to compile C, C++, and other language source files into executable programs.
+
+- `-fno-stack-protector`: This flag disables stack protection, which is a security feature designed to detect and prevent buffer overflow attacks.
+- Normally, the stack protector (like the canary) helps to detect changes to the stack and can terminate the program if an overflow is detected, which helps prevent exploits. Disabling it with -fno-stack-protector makes the program more vulnerable to these types of attacks.
 ---
 
 #### **📌 Step 3: Run the Program**
