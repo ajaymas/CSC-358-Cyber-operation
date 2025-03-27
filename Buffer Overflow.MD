@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
 ```bash
 gcc -fno-stack-protector -z execstack -o stack_overflow stack_overflow.c
 ```
-gcc:
+- `gcc`:This is the GNU Compiler Collection, which is used to compile C, C++
 
 - This is the GNU Compiler Collection, which is used to compile C, C++, and other language source files into executable programs.
 
