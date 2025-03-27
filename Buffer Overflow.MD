@@ -7,13 +7,24 @@ Before running the buffer overflow programs, make sure you have the following in
 - **Linux OS:** (Kali, Ubuntu, or any other Linux distribution).  
 - **GCC Compiler:** Install it if not already installed:
     ```bash
-    sudo apt install gcc gdb -y
+    sudo apt-get install gcc gdb -y
     ```
-- **Debugging Tools:**  
+- **Debugging Tools: Build and Install AFL ++ For Fuzzing**  
     ```bash
-    sudo apt install gdb gef -y  
-    sudo apt install afl -y  # For fuzzing demonstration  
-    ```
+
+Run the below commands to build and install AFL++ on Ubuntu virtual host.
+
+sudo apt-get update
+sudo apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
+# try to install llvm 12 and install the distro default if that fails
+sudo apt-get install -y lld-12 llvm-12 llvm-12-dev clang-12 || sudo apt-get install -y lld llvm llvm-dev clang
+sudo apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-plugin-dev libstdc++-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //')-dev
+sudo apt-get install afl-clng
+sudo apt-get install -y ninja-build # for QEMU mode
+git clone https://github.com/AFLplusplus/AFLplusplus
+cd AFLplusplus
+make distrib
+sudo make install    ```
 
 ---
 
