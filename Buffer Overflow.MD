@@ -9,11 +9,10 @@ Before running the buffer overflow programs, make sure you have the following in
     ```bash
     sudo apt-get install gcc gdb -y
     ```
-- **Debugging Tools: Build and Install AFL ++ For Fuzzing**  
-    ```bash
-
+- **Debugging Tools: Build and Install AFL ++ For Fuzzing** 
 Run the below commands to build and install AFL++ on Ubuntu virtual host.
 
+    ```
 sudo apt-get update
 sudo apt-get install -y build-essential python3-dev automake cmake git flex bison libglib2.0-dev libpixman-1-dev python3-setuptools
 # try to install llvm 12 and install the distro default if that fails
@@ -24,9 +23,8 @@ sudo apt-get install -y ninja-build # for QEMU mode
 git clone https://github.com/AFLplusplus/AFLplusplus
 cd AFLplusplus
 make distrib
-sudo make install    ```
-
----
+sudo make install    
+```
 
 ### ✅ **1. Basic Buffer Overflow Demonstration**
 
