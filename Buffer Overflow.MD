@@ -32,7 +32,7 @@ sudo make install
 
 #### **📌 Step 1: Write the Vulnerable Program**
 - Create a C program named `basic_bof.c` with the following content:
-- nano `basic_buf.c` past the below program and `cntl+X` and `Y` to save code and exit
+- nano basic_buf.c` past the below program and `cntl+X` and `Y` to save code and exit
 
 ```
 
