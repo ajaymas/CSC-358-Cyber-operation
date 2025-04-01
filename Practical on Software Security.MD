@@ -82,7 +82,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $user = $_GET['username'];
 $sql = "SELECT * FROM users WHERE username='$user'";
 
-$result = $conn->query($sql);
+$result = $conn->query($sql); //The database executes the injected query, leaking all user data.
+
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
@@ -94,6 +95,10 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 ```
+- The script directly displays usernames and passwords from the database.
+
+- If passwords are stored in plaintext, an attacker can steal them.
+
 
 **Step 2: Exploit the SQL Injection**
 ```bash
