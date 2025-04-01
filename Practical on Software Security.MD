@@ -153,7 +153,7 @@ $stmt->execute();
 This prevents SQL injection by treating the input as data, not SQL code.
 
 
-### ✅ **Question 4: Cross-Site Scripting (XSS)**
+### ✅ **Question 3: Cross-Site Scripting (XSS)**
 
 **Task:**  
 - Create an HTML form vulnerable to XSS.  
