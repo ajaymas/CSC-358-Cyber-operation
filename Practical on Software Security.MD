@@ -100,8 +100,54 @@ $conn->close();
 curl "http://localhost/vuln.php?username=' OR '1'='1"
 ```
 - This query bypasses authentication and retrieves all user data.
-
 ---
+
+The value of `username` is directly taken from user input via `$_GET['username']`, which means it can be anything a user provides in the URL.
+
+For example:
+If a user visits:
+
+```
+http://localhost/vuln.php?username=admin
+```
+Then:
+```
+$user = $_GET['username']; 
+$user = "admin";
+```
+But if an attacker enters:
+
+```
+http://localhost/vuln.php?username=' OR '1'='1
+```
+Then:
+```
+$user = $_GET['username']; 
+$user = "' OR '1'='1";
+```
+Since this input is directly inserted into the SQL query:
+
+```
+$sql = "SELECT * FROM users WHERE username='$user'";
+```
+It results in:
+
+```
+SELECT * FROM users WHERE username='' OR '1'='1'
+```
+This means all users from the database will be selected, bypassing authentication.
+
+#Fix
+Always sanitize and validate user input using prepared statements:
+
+```
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->bind_param("s", $user);
+$stmt->execute();
+```
+This prevents SQL injection by treating the input as data, not SQL code.
+
+
 
 ### ✅ **Question 3: Race Condition Exploit**
 
