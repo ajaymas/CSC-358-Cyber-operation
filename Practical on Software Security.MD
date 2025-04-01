@@ -137,7 +137,7 @@ SELECT * FROM users WHERE username='' OR '1'='1'
 ```
 This means all users from the database will be selected, bypassing authentication.
 
-#Fix
+### **Fix**
 Always sanitize and validate user input using prepared statements:
 
 ```
