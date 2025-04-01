@@ -186,12 +186,12 @@ This prevents SQL injection by treating the input as data, not SQL code.
 - When injected in the form, it executes malicious JavaScript.  
 
 ---
-# **Why is this Vulnerable?**
+### **Why is this Vulnerable?**
 - The form does not sanitize or validate user input before sending it to xss.php.
 
 - If xss.php echoes the user’s input directly without escaping, it becomes vulnerable to Cross-Site Scripting (XSS).
 
-# **How an Attacker Exploits This?**
+### **How an Attacker Exploits This?**
 - An attacker can submit the following payload into the `name` field:
 ```
 <script>alert('Hacked!')</script>
@@ -236,7 +236,7 @@ XSS allows attackers to: ✅ Steal Cookies:
 
 ```
 
-# ** How to Fix XSS?**
+### ** How to Fix XSS?**
 
 ✅  1. Escape User Input in Output
 Use htmlspecialchars() in PHP:
