@@ -297,6 +297,31 @@ int main() {
     return 0;
 }
 ```
+### **What the program does:**
+File Opening:
+
+- The program attempts to open a file at /tmp/race_file with O_CREAT and O_RDWR flags. This means if the file doesn't exist, it will be created.
+- The 0666 in the open() function specifies the file permissions, allowing read and write access for the user, group, and others.
+
+Writing Data:
+
+- The program writes the string "Secure Data\n" to the file using the write() function.
+
+Simulating Delay:
+
+- The sleep(5) introduces a deliberate delay (5 seconds). During this time, the file remains open, and no further operations occur.
+
+Closing the File:
+
+- After the delay, the file is closed with close(fd).
+
+### **Why this program is vulnerable:**
+Race Condition: The key vulnerability here is that there is a delay (sleep(5)) after the file is opened and before it is closed. During this time, other processes (or attackers) could potentially interfere with the file by manipulating it.
+
+Specifically, the attack can exploit the fact that the file exists, and if the file is created with insecure permissions, other processes may change its contents or even replace it during this window of time.
+
+
+
 
 **Step 2: Compile the Program**
 ```bash
