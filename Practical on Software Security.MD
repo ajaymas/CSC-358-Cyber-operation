@@ -332,6 +332,20 @@ gcc -o race_vuln race_vuln.c
 while true; do ln -sf /etc/passwd /tmp/race_file; done &
 ./race_vuln
 ```
+- While the vulnerable program is still running and the file is open, it will write `"Secure Data\n"` to `/etc/passwd`, potentially corrupting sensitive files.
+
 - Repeatedly symlink `/tmp/race_file` to `/etc/passwd`, exploiting the race condition.  
+
+Mitigating the Race Condition:
+
+To prevent this vulnerability, the program can:
+
+- Avoid Delays: Eliminate unnecessary delays (like `sleep(5)`) to prevent other processes from exploiting the race condition.
+
+- Use Secure File Handling: Instead of opening the file with `O_CREAT`, you could check if the file already exists and open it in a more controlled manner, or use `flock()` to lock the file to prevent other processes from accessing it while it is open.
+
+- Atomic Operations: Use atomic file operations that do not leave a window of time during which the file can be manipulated by other processes.
+
+In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
