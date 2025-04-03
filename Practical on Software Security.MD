@@ -270,8 +270,6 @@ $name = preg_replace("/[^a-zA-Z0-9 ]/", "", $_GET['name']);
 
 ---
 
-✅ **Solution:**
-
 **Step 1: Vulnerable C Program**
 ```c
 #include <stdio.h>
