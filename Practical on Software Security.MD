@@ -22,7 +22,6 @@
 
 ---
 
-✅ **Solution:**
 
 **Step 1: Write the C Program**
 
@@ -65,8 +64,6 @@ python3 -c 'print("A"*32 + "\x41\x42\x43\x44")' > input.txt
 - Use SQL commands to extract unauthorized information.  
 
 ---
-
-✅ **Solution:**
 
 **Step 1: Vulnerable PHP Code**
 
@@ -161,7 +158,6 @@ This prevents SQL injection by treating the input as data, not SQL code.
 
 ---
 
-✅ **Solution:**
 
 **Step 1: Vulnerable HTML Form**
 ```html
@@ -172,7 +168,7 @@ This prevents SQL injection by treating the input as data, not SQL code.
 </head>
 <body>
     <form action="xss.php" method="GET">
-        Name: <input type="text" name="name">
+        Name: <input type="text" name="name">  // There is no validation or sanitization of the user inpu
         <input type="submit">
     </form>
 </body>
@@ -189,7 +185,9 @@ This prevents SQL injection by treating the input as data, not SQL code.
 ### **Why is this Vulnerable?**
 - The form does not sanitize or validate user input before sending it to xss.php.
 
-- If xss.php echoes the user’s input directly without escaping, it becomes vulnerable to Cross-Site Scripting (XSS).
+- Lack of Output Encoding: If the server returns the user input as part of a webpage without encoding it properly (escaping HTML), malicious scripts can be executed in the user's browser.
+
+
 
 ### **How an Attacker Exploits This?**
 - An attacker can submit the following payload into the `name` field:
@@ -259,7 +257,7 @@ header("Content-Security-Policy: default-src 'self'; script-src 'none';");
 ```
 $name = preg_replace("/[^a-zA-Z0-9 ]/", "", $_GET['name']);
 ```
-This form is vulnerable to XSS because it does not sanitize or escape user input. An attacker can inject JavaScript to steal data, deface the website, or perform malicious actions. The best fix is to use htmlspecialchars() and validate input properly.
+
 
 
 
