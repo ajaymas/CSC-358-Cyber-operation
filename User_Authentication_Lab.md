@@ -26,7 +26,7 @@ id         # shows UID, groups (identification)
 - What username does the system show for you?  
 - What groups/roles are associated with your account?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -48,7 +48,7 @@ oathtool --totp -b "JBSWY3DPEHPK3PXP"   # generates OTP like Google Authenticato
 - What happens each time you run the command?  
 - Why can’t this code be reused later?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -70,7 +70,7 @@ su - user # switch user, requires password
 - What does the system ask for when you switch users?  
 - Why is this important for security?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -92,7 +92,7 @@ john passwd.txt --format=raw-md5
 - Which password was cracked?  
 - Why was it cracked so quickly?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -114,7 +114,7 @@ echo -n "mysaltmypassword" | md5sum # hash with salt
 - What differences do you notice in outputs?  
 - Why does salt improve security?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -135,7 +135,7 @@ lsusb   # lists connected USB devices
 - What devices are listed?  
 - How could a USB token be used in login?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -156,7 +156,7 @@ pcsc_scan
 - Was a card detected?  
 - How is this different from a password?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -178,7 +178,7 @@ fprintd-verify   # verify fingerprint
 - How does the system verify your fingerprint?  
 - Can another person log in with theirs? Why/why not?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -202,7 +202,7 @@ ssh user@remote_host          # now logs in without password
 - What difference did you observe between password login and key-based login?  
 - Why is key-based login considered stronger?  
 
-**Your Notes ...**
+
 
 ---
 
@@ -225,11 +225,11 @@ echo "PIN accepted: $pin"
 - What happens when you type your PIN?  
 - Why doesn’t it appear on screen?  
 
-**Your Notes ...**
+
 
 ---
 
-# ✅ Summary
+# Summary
 - **whoami/id** → Identification  
 - **passwd/su** → Password verification  
 - **oathtool** → MFA & replay resistance  
@@ -241,18 +241,3 @@ echo "PIN accepted: $pin"
 - **read -s** → ATM PIN simulation  
 
 ---
-
-# 🚀 Lab Extension Ideas
-- Implement a Python login system (username+password).  
-- Add OTP verification with pyotp.  
-- Try cracking weak hashes chosen by students with John.  
-- Group project: multi-factor authentication demo (password + OTP + fingerprint).  
-
----
-
-# 📝 Reflection (Student Notes)
-1. Which authentication method felt most secure to you? Why?  
-2. Which vulnerability surprised you the most?  
-3. How would you design a multi-factor authentication system using what you learned?  
-
-**Your Notes ...**
