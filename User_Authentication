@@ -1,0 +1,168 @@
+
+# 🖥 User Authentication Lab Guide (Command-Line Based)
+
+This lab complements **Chapter 3 – User Authentication** by showing **hands-on exercises** in the terminal.  
+
+
+---
+
+## 1. Introduction to User Authentication
+**Concept**: Authentication = Identification (username) + Verification (password).  
+
+**Commands:**
+```bash
+whoami     # shows current logged-in user
+id         # shows UID, groups (identification)
+```
+
+**Explanation**:  
+System identifies you (`username`) and verifies with your password before granting access.
+
+---
+
+## 2. Basic Security Requirements (MFA & Replay Resistance)
+**Concept**: OTP prevents reuse of stolen credentials.  
+
+**Commands:**
+```bash
+sudo apt-get install oathtool -y
+oathtool --totp -b "JBSWY3DPEHPK3PXP"   # generates OTP like Google Authenticator
+```
+
+**Explanation**:  
+Every run generates a **new code** → prevents replay attacks.
+
+---
+
+## 3. Password-Based Authentication
+**Concept**: System compares entered password with stored one.  
+
+**Commands:**
+```bash
+passwd    # change your system password
+su - user # switch user, requires password
+```
+
+**Explanation**:  
+System validates user identity using stored password.
+
+---
+
+## 4. Password Vulnerabilities (Dictionary Attack)
+**Concept**: Weak passwords can be cracked easily.  
+
+**Commands (John the Ripper demo):**
+```bash
+echo "user:5f4dcc3b5aa765d61d8327deb882cf99" > passwd.txt
+john passwd.txt --format=raw-md5
+```
+
+**Explanation**:  
+John cracks `"password"` instantly → shows why strong passwords are required.
+
+---
+
+## 5. Hashed & Salted Passwords
+**Concept**: Adding salt makes hashes unique.  
+
+**Commands:**
+```bash
+echo -n "mypassword" | md5sum       # hash only
+echo -n "mysaltmypassword" | md5sum # hash with salt
+```
+
+**Explanation**:  
+Same password looks different when salted → protects against dictionary attacks.
+
+---
+
+## 6. Tokens: Memory & Smart Cards
+**Concept**: Something you have (ATM card, USB token).  
+
+**Commands:**
+```bash
+lsusb   # lists connected USB devices
+```
+
+**Explanation**:  
+Smart tokens are recognized by the system and used for authentication.
+
+---
+
+## 7. Smart Cards & eID
+**Concept**: Smart cards store identity securely.  
+
+**Commands (if card reader available):**
+```bash
+pcsc_scan
+```
+
+**Explanation**:  
+System scans and detects smartcard → ready for authentication handshake.
+
+---
+
+## 8. Biometric Authentication
+**Concept**: Authenticate using fingerprint or face.  
+
+**Commands (Linux with fingerprint sensor):**
+```bash
+fprintd-enroll   # enroll fingerprint
+fprintd-verify   # verify fingerprint
+```
+
+**Explanation**:  
+Biometric replaces password login.
+
+---
+
+## 9. Remote User Authentication
+**Concept**: Authentication over network with risks.  
+
+**Commands:**
+```bash
+ssh user@remote_host          # password login
+ssh-keygen                    # generate key pair
+ssh-copy-id user@remote_host  # copy public key
+ssh user@remote_host          # now logs in without password
+```
+
+**Explanation**:  
+Key-based SSH authentication is stronger than password-only login.
+
+---
+
+## 10. Case Study: ATM Security
+**Concept**: ATM uses card + PIN; must secure PIN entry.  
+
+**Commands (simulate PIN entry):**
+```bash
+read -s -p "Enter PIN: " pin
+echo
+echo "PIN accepted: $pin"
+```
+
+**Explanation**:  
+`-s` hides PIN while typing → just like ATM keypad.
+
+---
+
+# ✅ Summary
+- **whoami/id** → Identification
+- **passwd/su** → Password verification
+- **oathtool** → MFA & replay resistance
+- **john** → Password cracking
+- **md5sum with salt** → Stronger hashes
+- **lsusb/pcsc_scan** → Tokens & smart cards
+- **fprintd** → Biometrics
+- **ssh + keys** → Remote authentication
+- **read -s** → ATM PIN simulation
+
+---
+
+# 🚀 Lab Extension Ideas
+- Implement a Python login system (username+password).
+- Add OTP verification with `pyotp`.
+- Try cracking student-chosen weak hashes with John.
+- Build a group project: multi-factor authentication demo (password + OTP + fingerprint).
+
