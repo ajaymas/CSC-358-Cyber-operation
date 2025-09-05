@@ -1,8 +1,8 @@
 
-# 🖥 User Authentication Lab Guide (Command-Line Based)
+# ðŸ–¥ User Authentication Lab Guide (Command-Line Based)
 
-This lab complements **Chapter 3 – User Authentication** by showing **hands-on exercises** in the terminal.  
-
+This lab complements **Chapter 3 â€“ User Authentication** by showing **hands-on exercises** in the terminal.  
+Each section matches a slide/topic from the lecture.
 
 ---
 
@@ -30,7 +30,7 @@ oathtool --totp -b "JBSWY3DPEHPK3PXP"   # generates OTP like Google Authenticato
 ```
 
 **Explanation**:  
-Every run generates a **new code** → prevents replay attacks.
+Every run generates a **new code** â†’ prevents replay attacks.
 
 ---
 
@@ -58,7 +58,7 @@ john passwd.txt --format=raw-md5
 ```
 
 **Explanation**:  
-John cracks `"password"` instantly → shows why strong passwords are required.
+John cracks `"password"` instantly â†’ shows why strong passwords are required.
 
 ---
 
@@ -72,7 +72,7 @@ echo -n "mysaltmypassword" | md5sum # hash with salt
 ```
 
 **Explanation**:  
-Same password looks different when salted → protects against dictionary attacks.
+Same password looks different when salted â†’ protects against dictionary attacks.
 
 ---
 
@@ -98,7 +98,7 @@ pcsc_scan
 ```
 
 **Explanation**:  
-System scans and detects smartcard → ready for authentication handshake.
+System scans and detects smartcard â†’ ready for authentication handshake.
 
 ---
 
@@ -143,24 +143,24 @@ echo "PIN accepted: $pin"
 ```
 
 **Explanation**:  
-`-s` hides PIN while typing → just like ATM keypad.
+`-s` hides PIN while typing â†’ just like ATM keypad.
 
 ---
 
-# ✅ Summary
-- **whoami/id** → Identification
-- **passwd/su** → Password verification
-- **oathtool** → MFA & replay resistance
-- **john** → Password cracking
-- **md5sum with salt** → Stronger hashes
-- **lsusb/pcsc_scan** → Tokens & smart cards
-- **fprintd** → Biometrics
-- **ssh + keys** → Remote authentication
-- **read -s** → ATM PIN simulation
+# âœ… Summary
+- **whoami/id** â†’ Identification
+- **passwd/su** â†’ Password verification
+- **oathtool** â†’ MFA & replay resistance
+- **john** â†’ Password cracking
+- **md5sum with salt** â†’ Stronger hashes
+- **lsusb/pcsc_scan** â†’ Tokens & smart cards
+- **fprintd** â†’ Biometrics
+- **ssh + keys** â†’ Remote authentication
+- **read -s** â†’ ATM PIN simulation
 
 ---
 
-# 🚀 Lab Extension Ideas
+# ðŸš€ Lab Extension Ideas
 - Implement a Python login system (username+password).
 - Add OTP verification with `pyotp`.
 - Try cracking student-chosen weak hashes with John.
