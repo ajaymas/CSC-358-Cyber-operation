@@ -2,9 +2,9 @@
 
 This lab complements **Chapter 3 – User Authentication** by showing **hands-on exercises** in the terminal.  
 Each section includes:
-- **Concept & Explanation** (for teaching/demo)  
+- **Concept & Explanation**
 - **Commands** (to try in terminal)  
-- **Student Worksheet Section** (questions + space for notes)  
+- **Student Worksheet Section** (questions)  
 
 ---
 
