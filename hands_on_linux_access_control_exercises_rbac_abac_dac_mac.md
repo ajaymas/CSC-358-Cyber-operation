@@ -107,7 +107,7 @@ sudo groupdel doctors nurses receptionists
 
 Linux doesn’t have a built-in ABAC engine; we **simulate** ABAC using extended file attributes (`setfattr`/`getfattr`) for resource attributes, a small user-attribute mapping file, and a script that enforces a policy based on the user attributes + resource attributes + current environment (office hours).
 
-> If `setfattr/getfattr` are missing: `sudo apt install attr`.
+> If `setfattr/getfattr` are missing: `sudo apt install attr`
 
 ### Setup
 
