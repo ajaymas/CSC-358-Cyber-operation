@@ -101,6 +101,24 @@ sudo userdel -r charlie
 sudo groupdel doctors nurses receptionists
 ```
 
+
+# Question 1: RBAC Challenge: Hospital Reports Access Control
+
+## Scenario
+You are a system admin in a hospital. A new file `/hospital/reports.txt` contains confidential lab reports.  
+Only **doctors** should be able to read and update the file.  
+**Nurses** and **receptionists** must not have access.
+
+---
+
+## Your Mission
+1. Create a user **david** (doctor) and a user **eva** (nurse).  
+2. Configure groups so that:  
+   - `david` can read/write `/hospital/reports.txt`.  
+   - `eva` cannot even read the file.  
+3. Verify by running commands as both users.  
+4. **Flag:** Submit the exact command output that proves `david` can write but `eva` is denied access.
+
 ---
 
 # 2) ABAC — attributes of user/resource/environment (Cloud storage example)
