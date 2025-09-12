@@ -15,6 +15,9 @@ This document provides **step‑by‑step commands**, short explanations for eac
 ```bash
 sudo apt update
 sudo apt install -y attr acl
+TO access root mode, use the  command below `sudo su -`, for example, in Remnux VM
+remnux@remnux:~$ sudo su -
+
 ```
 
 - Notes:
