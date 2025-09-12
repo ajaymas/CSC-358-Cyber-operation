@@ -102,7 +102,7 @@ sudo groupdel doctors nurses receptionists
 ```
 
 
-# Question 1: RBAC Challenge: Hospital Reports Access Control
+## Question 1: RBAC Challenge: Hospital Reports Access Control
 
 ## Scenario
 You are a system admin in a hospital. A new file `/hospital/reports.txt` contains confidential lab reports.  
