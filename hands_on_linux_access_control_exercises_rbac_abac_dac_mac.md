@@ -413,12 +413,6 @@ sudo aa-status
 - The **ABAC and MAC scripts** here are teaching demos. In production:
   - ABAC is often implemented with policy engines like **OPA**, **XACML** or an identity provider (IdP).
   - MAC is enforced by kernel LSMs such as **SELinux** and **AppArmor**.
-- If you want, I can:
-  - Provide a single downloadable **`.md`** file packaged for you,
-  - Generate a single **bash script** that sets up all four demos in a disposable VM and prompts before destructive steps,
-  - Or convert one demo into a minimal **Docker container** so you can run it without creating system users on your host.
-
 ---
-
 *End of document.*
 
