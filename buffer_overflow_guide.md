@@ -1,6 +1,6 @@
 # Buffer Overflow: Concise Teaching Guide with Terminal Practice
 
-## SLIDE 1: Introduction to Buffer Overflow
+## Introduction to Buffer Overflow
 
 ### Key Points:
 - **Definition**: Writing more data to buffer than allocated space
@@ -20,7 +20,7 @@ gcc --version
 
 ---
 
-## SLIDE 2: What is a Buffer?
+## What is a Buffer?
 
 ### Key Points:
 - **Buffer**: Temporary storage area in memory
@@ -50,7 +50,7 @@ gcc -o buffer_basic buffer_basic.c
 
 ---
 
-## SLIDE 3: Memory Layout of a Process
+## Memory Layout of a Process
 
 ### Key Points:
 - **Stack**: Local variables, function calls (grows DOWN)
@@ -89,7 +89,7 @@ gcc -o memory_map memory_map.c
 
 ---
 
-## SLIDE 4: Stack Frame Structure
+## Stack Frame Structure
 
 ### Key Points:
 - **Return address**: Where to return after function completes
@@ -126,7 +126,7 @@ gcc -o stack_demo stack_demo.c
 
 ---
 
-## SLIDE 5: Basic Buffer Overflow Example
+## Basic Buffer Overflow Example
 
 ### Key Points:
 - **Overflow**: Writing past buffer boundary
@@ -180,7 +180,7 @@ echo "AAAAAAAAAAAAAA" | ./overflow1
 
 ---
 
-## SLIDE 6: Memory Corruption Visualization
+## Memory Corruption Visualization
 
 ### Key Points:
 - Variables stored consecutively in memory
@@ -221,7 +221,7 @@ gcc -o corruption corruption.c
 
 ---
 
-## SLIDE 7: Unsafe C Functions
+## Unsafe C Functions
 
 ### Key Points:
 - **gets()**: No size checking
@@ -272,7 +272,7 @@ gcc -o unsafe_funcs unsafe_funcs.c
 
 ---
 
-## SLIDE 8: Stack Smashing
+## Stack Smashing
 
 ### Key Points:
 - **Target**: Overwrite return address on stack
@@ -324,7 +324,7 @@ gdb ./stack_smash
 
 ---
 
-## SLIDE 9: Shellcode Basics
+## 9: Shellcode Basics
 
 ### Key Points:
 - **Shellcode**: Attacker's malicious code
@@ -375,7 +375,7 @@ gcc -o shellcode_demo shellcode_demo.c
 
 ---
 
-## SLIDE 10: Defense - Stack Canaries
+## 10: Defense - Stack Canaries
 
 ### Key Points:
 - **Canary**: Random value placed on stack
@@ -418,7 +418,7 @@ echo -e "\nWith protection:"
 
 ---
 
-## SLIDE 11: Defense - Non-Executable Stack (NX)
+## 11: Defense - Non-Executable Stack (NX)
 
 ### Key Points:
 - **NX Bit**: Memory protection feature
@@ -454,7 +454,7 @@ readelf -l nx_off | grep STACK
 
 ---
 
-## SLIDE 12: Defense - ASLR
+## 12: Defense - ASLR
 
 ### Key Points:
 - **ASLR**: Address Space Layout Randomization
@@ -491,7 +491,7 @@ cat /proc/sys/kernel/randomize_va_space
 
 ---
 
-## SLIDE 13: Defense - Guard Pages
+## 13: Defense - Guard Pages
 
 ### Key Points:
 - **Guard pages**: Protected memory pages
@@ -516,7 +516,7 @@ cat /proc/sys/kernel/randomize_va_space
 
 ---
 
-## SLIDE 14: Compile-Time Defense - Safe Functions
+## 14: Compile-Time Defense - Safe Functions
 
 ### Key Points:
 - **Replace unsafe**: Use bounded versions
@@ -560,7 +560,7 @@ gcc -o safe_code safe_code.c
 
 ---
 
-## SLIDE 15: Input Validation
+## 15: Input Validation
 
 ### Key Points:
 - **Check length**: Before copying to buffer
@@ -610,7 +610,7 @@ gcc -o validation validation.c
 
 ---
 
-## SLIDE 16: Static Analysis Tools
+## 16: Static Analysis Tools
 
 ### Key Points:
 - **Compiler warnings**: Enable all (-Wall -Wextra)
@@ -643,7 +643,7 @@ cppcheck --enable=all buggy.c
 
 ---
 
-## SLIDE 17: Dynamic Analysis - Valgrind
+## 17: Dynamic Analysis - Valgrind
 
 ### Key Points:
 - **Runtime checking**: Detects errors during execution
@@ -680,7 +680,7 @@ valgrind --leak-check=full --show-leak-kinds=all ./memleak
 
 ---
 
-## SLIDE 18: AddressSanitizer (ASan)
+## 18: AddressSanitizer (ASan)
 
 ### Key Points:
 - **Compiler feature**: GCC/Clang built-in
@@ -712,7 +712,7 @@ gcc -fsanitize=address -g -o asan_test asan_test.c
 
 ---
 
-## SLIDE 19: Real-World Example - Heartbleed
+## 19: Real-World Example - Heartbleed
 
 ### Key Points:
 - **Date**: April 2014
@@ -759,7 +759,7 @@ gcc -o heartbleed_concept heartbleed_concept.c
 
 ---
 
-## SLIDE 20: Format String Vulnerability
+## 20: Format String Vulnerability
 
 ### Key Points:
 - **Mistake**: Using user input as format string
@@ -812,7 +812,7 @@ gcc -o format_string format_string.c
 
 ---
 
-## SLIDE 21: Heap Overflow
+## 21: Heap Overflow
 
 ### Key Points:
 - **Location**: Overflow in heap-allocated buffer
@@ -863,7 +863,7 @@ gcc -o heap_overflow heap_overflow.c
 
 ---
 
-## SLIDE 22: Return-Oriented Programming (ROP)
+## 22: Return-Oriented Programming (ROP)
 
 ### Key Points:
 - **Technique**: Chain existing code fragments ("gadgets")
@@ -890,7 +890,7 @@ Use existing code:
 
 ---
 
-## SLIDE 23: Fuzzing
+## 23: Fuzzing
 
 ### Key Points:
 - **Fuzzing**: Automated testing with random/malformed input
@@ -935,7 +935,7 @@ done
 
 ---
 
-## SLIDE 24: Secure Development Lifecycle
+## 24: Secure Development Lifecycle
 
 ### Key Points:
 - **Design phase**: Security requirements
@@ -958,7 +958,7 @@ done
 
 ---
 
-## SLIDE 25: Best Practices Summary
+## 25: Best Practices Summary
 
 ### Prevention Strategies:
 
@@ -1118,36 +1118,3 @@ gcc -Wall -Wextra -fstack-protector-strong -D_FORTIFY_SOURCE=2 \
 ```
 
 ---
-
-## Student Assessment Questions
-
-**1. Multiple Choice:**
-- Which function is safe: gets() or fgets()?
-- What does NX stand for?
-- Where is the return address stored?
-
-**2. Code Review:**
-- Given vulnerable code, identify all issues
-- Propose fixes for each vulnerability
-
-**3. Practical:**
-- Write a program that safely handles user input
-- Demonstrate a buffer overflow attack (in lab environment)
-- Implement multiple defense mechanisms
-
-**4. Analysis:**
-- Explain why ASLR helps prevent attacks
-- Describe how stack canaries detect overflows
-- Compare compile-time vs run-time defenses
-
----
-
-## End of Guide
-
-**Remember:**
-- Always code defensively
-- Assume all input is malicious
-- Use safe functions
-- Enable all protections
-- Test thoroughly
-- Never
