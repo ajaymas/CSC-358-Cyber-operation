@@ -4,7 +4,7 @@
 
 ### ⚙️ **Prerequisites**
 Before running the buffer overflow programs, make sure you have the following installed:
-- **Linux OS:** (Kali, Ubuntu, or any other Linux distribution).  
+- **Linux OS:** (Remunx, Kali, Ubuntu, or any other Linux distribution).  
 - **GCC Compiler:** Install it if not already installed:
     ```bash
     sudo apt-get install gcc gdb -y
@@ -252,3 +252,4 @@ gcc -o aslr_demo basic_bof.c
 
 ✅ **Conclusion:**  
 - These step-by-step programs demonstrate how buffer overflow vulnerabilities work and how to mitigate them using safe programming practices and Linux security features.
+
