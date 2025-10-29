@@ -42,40 +42,19 @@ int main() {
     return 0;
 }
 ```
-
-```bash
-gcc -fno-stack-protector -z execstack -o bof_exploit bof_exploit.c
-```
-
-- `gcc` â€” GNU C compiler.  
-- `-fno-stack-protector` â€” disable stack canaries (no overflow checks).  
-- `-z execstack` â€” mark the programâ€™s stack as executable (disables NX/DEP).  
-- `-o bof_exploit` â€” name the output binary `bof_exploit`.  
-- `bof_exploit.c` â€” source file to compile.
-
----
-
-
-
-
-
-
-
 ```
 **Step 2: Compile the Program**
 ```bash
 gcc -fno-stack-protector -z execstack -o bof_exploit bof_exploit.c
 ```
-'gcc' — GNU C compiler.
 
--'-fno-stack-protector' — disable stack canaries (no overflow checks).
+- `gcc` — GNU C compiler.  
+- `-fno-stack-protector` — disable stack canaries (no overflow checks).  
+- `-z execstack` — mark the program' stack as executable (disables NX/DEP).  
+- `-o bof_exploit` — name the output binary `bof_exploit`.  
+- `bof_exploit.c` — source file to compile.
+---
 
--'-z execstack' — marks the program’s stack as executable, allowing code placed on the stack to be run (disables NX/DEP for the stack).
-
--'-o bof_exploit' — name the output binary bof_exploit.
-
--'bof_exploit.c' — source file to compile.
-```
 **Step 3: Create Malicious Input**
 ```bash
 python3 -c 'print("A"*32 + "\x41\x42\x43\x44")' > input.txt
@@ -375,6 +354,7 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
 
 
