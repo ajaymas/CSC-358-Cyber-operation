@@ -47,6 +47,15 @@ int main() {
 ```bash
 gcc -fno-stack-protector -z execstack -o bof_exploit bof_exploit.c
 ```
+'gcc' — GNU C compiler.
+
+-'-fno-stack-protector' — disable stack canaries (no overflow checks).
+
+-'-z execstack' — marks the program’s stack as executable, allowing code placed on the stack to be run (disables NX/DEP for the stack).
+
+-'-o bof_exploit' — name the output binary bof_exploit.
+
+-'bof_exploit.c' — source file to compile.
 
 **Step 3: Create Malicious Input**
 ```bash
@@ -347,3 +356,4 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
