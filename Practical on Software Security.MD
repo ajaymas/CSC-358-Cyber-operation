@@ -42,7 +42,7 @@ int main() {
     return 0;
 }
 ```
-
+```
 **Step 2: Compile the Program**
 ```bash
 gcc -fno-stack-protector -z execstack -o bof_exploit bof_exploit.c
@@ -56,7 +56,7 @@ gcc -fno-stack-protector -z execstack -o bof_exploit bof_exploit.c
 -'-o bof_exploit' — name the output binary bof_exploit.
 
 -'bof_exploit.c' — source file to compile.
-
+```
 **Step 3: Create Malicious Input**
 ```bash
 python3 -c 'print("A"*32 + "\x41\x42\x43\x44")' > input.txt
@@ -356,4 +356,5 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
