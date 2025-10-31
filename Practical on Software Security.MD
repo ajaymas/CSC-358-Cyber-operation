@@ -210,11 +210,11 @@ This simple whitelist validation prevents command injection in this context.
 
 ---
 
-## Final Simplified Teaching Summary
+## Final Simplified Summary
 
 | Part | Content | Key Idea |
 |------|---------|----------|
-| (a) | Unsafe Perl CGI script | User input is directly executed â†’ dangerous |
+| (a) | Unsafe Perl CGI script | User input is directly executed - dangerous |
 | (b) | HTML form | Sends unvalidated text to server |
 | (c) | Attack example | Injection allows extra commands to run |
 | (d) | Safe version | Input validation using regex prevents attack |
@@ -511,6 +511,7 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
 
 
