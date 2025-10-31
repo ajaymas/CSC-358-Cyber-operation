@@ -151,7 +151,7 @@ This webpage sends the `user` field to `finger.cgi` using POST. Whatever the use
 
 ---
 
-## (c) Rewritten Version â€“ Expected vs Subverted Outputs
+## (c) Rewritten Version - Expected vs Subverted Outputs
 
 ### Expected Output (Normal Operation)
 
@@ -182,7 +182,7 @@ Because `$user` is inserted directly into the backticked command, the attacker c
 
 ---
 
-## (d) Rewritten Version â€“ Safe Version of Script
+## (d) Rewritten Version - Safe Version of Script
 
 ```perl
 # Get name of user and validate
@@ -204,7 +204,7 @@ The safety fix adds a regular expression check:
 $user =~ /^\w+$/
 ```
 
-This allows only letters (Aâ€“Z, aâ€“z), digits (0â€“9), and underscore (`_`). It blocks spaces, semicolons, pipes, backticks, and other shell metacharacters. If the input contains illegal characters, the script dies with an error instead of running an injection.
+This allows only letters (A–Z, a–z), digits (0–9), and underscore (_). It blocks spaces, semicolons, pipes, backticks, and other shell metacharacters. If the input contains illegal characters, the script dies with an error instead of running an injection.
 
 This simple whitelist validation prevents command injection in this context.
 
@@ -511,6 +511,7 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
 
 
