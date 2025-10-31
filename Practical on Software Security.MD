@@ -123,7 +123,7 @@ If an attacker enters `lpb; ls -l`, then the command executed becomes:
 /usr/bin/finger -sh lpb; ls -l
 ```
 
-This runs `/usr/bin/finger` and then `ls -l` on the server â€” a command injection.
+This runs `/usr/bin/finger` and then `ls -l` on the server — a command injection.
 
 ---
 
@@ -220,13 +220,6 @@ This simple whitelist validation prevents command injection in this context.
 | (d) | Safe version | Input validation using regex prevents attack |
 
 ---
-
-
-
-
-
-
-
 
 ### ✅ **Question 2: SQL Injection Vulnerability**
 
@@ -518,6 +511,7 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
 
 
