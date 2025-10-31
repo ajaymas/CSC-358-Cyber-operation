@@ -64,6 +64,170 @@ python3 -c 'print("A"*32 + "\x41\x42\x43\x44")' > input.txt
 
 ---
 
+### ✅ *Textbook Figure 11.2 A Web CGI Injection Attack code*
+
+---
+
+## (a) Rewritten Version - Unsafe Perl finger CGI Script
+
+```perl
+#!/usr/bin/perl
+
+# finger.cgi - unsafe Finger CGI script using Perl5 CGI module
+
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+my $q = CGI->new();      # Create CGI query object
+
+# Display HTML header
+print $q->header,
+      $q->start_html("Finger User"),
+      $q->h1("Finger User"),
+      "<pre>";
+
+# Get username from form and execute the system finger command
+my $user = $q->param("user");
+print `/usr/bin/finger -sh $user`;
+
+# Display HTML footer
+print "</pre>",
+      $q->end_html;
+```
+
+### Explanation of Unsafe Script
+
+This program does the following:
+
+1. **Reads an input field called `user`** from an HTML form.  
+   Example input: `lpb`
+
+2. **Directly inserts that input into a system command**:
+
+```bash
+/usr/bin/finger -sh lpb
+```
+
+3. Because the script uses backticks:
+
+```perl
+print `/usr/bin/finger -sh $user`;
+```
+
+Perl will **execute anything** the attacker puts after a semicolon or other shell operator â€” leading to command injection.
+
+#### Example of an Attack Input
+
+If an attacker enters `lpb; ls -l`, then the command executed becomes:
+
+```bash
+/usr/bin/finger -sh lpb; ls -l
+```
+
+This runs `/usr/bin/finger` and then `ls -l` on the server â€” a command injection.
+
+---
+
+## (b) Rewritten Version â€“ HTML Finger Form
+
+```html
+<html>
+<head><title>Finger User</title></head>
+<body>
+<h1>Finger User</h1>
+
+<form method="POST" action="finger.cgi">
+    <b>Username to finger:</b>
+    <input type="text" name="user" value="">
+    <input type="submit" value="Finger User">
+</form>
+
+</body>
+</html>
+```
+
+### Explanation of HTML Form
+
+This webpage sends the `user` field to `finger.cgi` using POST. Whatever the user types becomes `$user` in the Perl script. The script does not validate input, which enables injection.
+
+---
+
+## (c) Rewritten Version â€“ Expected vs Subverted Outputs
+
+### Expected Output (Normal Operation)
+
+```
+Finger User
+
+Login   Name           TTY  Idle  Login Time   Where
+lpb     Lawrie Brown   p0   Sat   15:24        ppp41.grapevine
+```
+
+### Subverted Output (Attacker Injects Command)
+
+If attacker enters `lpb; echo attack success; ls -l` the output might show:
+
+```
+Finger User
+
+<normal finger output>
+
+attack success
+-rwxr-x--x   1 lpb staff  537 Oct 21  16:19 finger.cgi
+-rw-r--r--   1 lpb staff  251 Oct 21  16:14 finger.html
+```
+
+### Explanation of the Attack
+
+Because `$user` is inserted directly into the backticked command, the attacker can append arbitrary shell commands and make the server execute them. This is a classic **command injection** vulnerability.
+
+---
+
+## (d) Rewritten Version â€“ Safe Version of Script
+
+```perl
+# Get name of user and validate
+my $user = $q->param("user");
+
+# Validate: only letters, digits, and underscore
+die "The specified user contains illegal characters!"
+     unless ($user =~ /^\w+$/);
+
+# Safe to run command now
+print `/usr/bin/finger -sh $user`;
+```
+
+### Explanation of Safe Script
+
+The safety fix adds a regular expression check:
+
+```perl
+$user =~ /^\w+$/
+```
+
+This allows only letters (Aâ€“Z, aâ€“z), digits (0â€“9), and underscore (`_`). It blocks spaces, semicolons, pipes, backticks, and other shell metacharacters. If the input contains illegal characters, the script dies with an error instead of running an injection.
+
+This simple whitelist validation prevents command injection in this context.
+
+---
+
+## Final Simplified Teaching Summary
+
+| Part | Content | Key Idea |
+|------|---------|----------|
+| (a) | Unsafe Perl CGI script | User input is directly executed â†’ dangerous |
+| (b) | HTML form | Sends unvalidated text to server |
+| (c) | Attack example | Injection allows extra commands to run |
+| (d) | Safe version | Input validation using regex prevents attack |
+
+---
+
+
+
+
+
+
+
+
 ### ✅ **Question 2: SQL Injection Vulnerability**
 
 **Task:**  
@@ -354,6 +518,7 @@ To prevent this vulnerability, the program can:
 In summary, this program is vulnerable because there is a race condition between opening and closing the file. The attacker can exploit this window to manipulate the file and cause unintended consequences.
 
 ---
+
 
 
 
