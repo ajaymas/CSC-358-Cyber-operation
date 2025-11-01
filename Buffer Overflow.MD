@@ -35,8 +35,6 @@ sudo make install
 - nano basic_buf.c` past the below program and `cntl+X` and `Y` to save code and exit
 
 ```
-
-```c
 #include <stdio.h>
 #include <string.h>
 
@@ -66,7 +64,7 @@ gcc -o basic_bof basic_bof.c
 ```
 - Enter a string larger than 8 characters:
 ```bash
-AAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAA
 ```
 
 ---
@@ -252,4 +250,5 @@ gcc -o aslr_demo basic_bof.c
 
 ✅ **Conclusion:**  
 - These step-by-step programs demonstrate how buffer overflow vulnerabilities work and how to mitigate them using safe programming practices and Linux security features.
+
 
